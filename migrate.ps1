@@ -4,7 +4,7 @@ param(
     [string]$username,
     [string]$csvFilePath,
     [string]$localCsvPath,
-    [string]$sshKeyPath   # Added parameter for SSH private key
+    [string]$sshKeyPath
 )
 
 Write-Host "Starting migration..."
@@ -15,8 +15,8 @@ Write-Host "CSV Path on Source VM: $csvFilePath"
 Write-Host "Local CSV Path: $localCsvPath"
 Write-Host "SSH Key Path: $sshKeyPath"
 
-# Construct remote paths using ${} to avoid parsing issues
-$remoteSource = "${username}@${sourceVMIP}:$csvFilePath"
+# Use braces to prevent parsing errors
+$remoteSource = "${username}@${sourceVMIP}:${csvFilePath}"
 $remoteTarget = "${username}@${targetVMIP}:/home/${username}/mydata.csv"
 
 Write-Host "Copying from source VM..."
