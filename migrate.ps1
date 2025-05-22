@@ -15,9 +15,14 @@ Write-Host "CSV Path on Source VM: $csvFilePath"
 Write-Host "Local CSV Path: $localCsvPath"
 Write-Host "SSH Key Path: $sshKeyPath"
 
-# Construct scp commands as strings
-$copyFromSourceCmd = "scp -o StrictHostKeyChecking=no -i `"$sshKeyPath`" $username@$sourceVMIP:`"$csvFilePath`" `"$localCsvPath`""
-$copyToTargetCmd = "scp -o StrictHostKeyChecking=no -i `"$sshKeyPath`" `"$localCsvPath`" $username@$targetVMIP:/home/$username/mydata.csv"
+$remoteSource = "${username}@${sourceVMIP}:`"$csvFilePath`""
+
+$remoteTarget = "${username}@${targetVMIP}:/home/${username}/mydata.csv"
+
+
+$copyFromSourceCmd = "scp -o StrictHostKeyChecking=no -i `"$sshKeyPath`" `"$remoteSource`" `"$localCsvPath`""
+$copyToTargetCmd = "scp -o StrictHostKeyChecking=no -i `"$sshKeyPath`" `"$localCsvPath`" `"$remoteTarget`""
+
 
 Write-Host "Running: $copyFromSourceCmd"
 $copyFromResult = & cmd /c $copyFromSourceCmd
