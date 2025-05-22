@@ -15,7 +15,7 @@ Write-Host "CSV Path on Source VM: $csvFilePath"
 Write-Host "Local CSV Path: $localCsvPath"
 Write-Host "SSH Key Path: $sshKeyPath"
 
-$remoteSource = "${username}@${sourceVMIP}:`"$csvFilePath`""
+$remoteSource = "${username}@${sourceVMIP}:$csvFilePath"
 
 $remoteTarget = "${username}@${targetVMIP}:/home/${username}/mydata.csv"
 
