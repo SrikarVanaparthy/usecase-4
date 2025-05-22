@@ -19,6 +19,9 @@ Write-Host "SSH Key Path: $sshKeyPath"
 $remoteSource = "${username}@${sourceVMIP}:${csvFilePath}"
 $remoteTarget = "${username}@${targetVMIP}:/home/${username}/mydata.csv"
 
+
+
+
 # Run SCP directly (avoid cmd /c)
 Write-Host "Copying from source VM..."
 scp -o StrictHostKeyChecking=no -i "$sshKeyPath" "$remoteSource" "$localCsvPath"
